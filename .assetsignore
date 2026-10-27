@@ -1,0 +1,8 @@
+# Publish the existing website only; keep server code, tests, and config private.
+*
+!/*.html
+!/*.css
+!/quiet.js
+!/robots.txt
+!/assets/
+!/assets/**

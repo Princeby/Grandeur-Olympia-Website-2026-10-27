@@ -114,13 +114,51 @@
     const serviceSelect=$('#enquiry-service');
     const choice=new URLSearchParams(window.location.search).get('service');
     if([...serviceSelect.options].some(option=>option.value===choice))serviceSelect.value=choice;
-    enquiryForm.addEventListener('submit',event=>{
-      event.preventDefault();if(!enquiryForm.reportValidity())return;
+    const submitButton=enquiryForm.querySelector('[type="submit"]');
+    const submitLabel=submitButton.firstChild;
+    const idleLabel=submitLabel.textContent;
+    const status=$('[data-enquiry-status]');
+    let sending=false;
+    enquiryForm.addEventListener('submit',async event=>{
+      event.preventDefault();
+      if(sending||!enquiryForm.reportValidity())return;
       const data=new FormData(enquiryForm);
-      const service=serviceSelect.options[serviceSelect.selectedIndex].textContent;
-      const target=composeEmail(service+' enquiry - '+String(data.get('name')).trim(),'Hello Grandeur Olympia,\n\nName: '+String(data.get('name')).trim()+'\nEmail: '+String(data.get('email')).trim()+'\nService: '+service+'\n\n'+String(data.get('message')).trim()+'\n\nThank you.');
-      const fallback=$('[data-enquiry-fallback]');fallback.href=target;fallback.hidden=false;
-      $('[data-enquiry-status]').textContent='Your email app should open with the prepared enquiry. Send the message there to reach our team.';
+      sending=true;submitButton.disabled=true;
+      submitLabel.textContent='Sending… ';
+      enquiryForm.setAttribute('aria-busy','true');
+      status.setAttribute('role','status');status.textContent='Sending your enquiry…';
+      let failureMessage='We couldn’t confirm your enquiry was sent. Please try again or email '+email+'.';
+      const controller=new AbortController();
+      const sendTimeout=setTimeout(()=>controller.abort(),25000);
+      try{
+        const response=await fetch(enquiryForm.action,{
+          signal:controller.signal,
+          method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify({
+            name:String(data.get('name')||'').trim(),
+            email:String(data.get('email')||'').trim(),
+            service:String(data.get('service')||''),
+            message:String(data.get('message')||'').trim(),
+            website:String(data.get('website')||'')
+          })
+        });
+        const result=await response.json().catch(()=>null);
+        if(!response.ok||result?.ok!==true){
+          if(typeof result?.error==='string')failureMessage=result.error;
+          throw new Error('Enquiry was not accepted');
+        }
+        enquiryForm.reset();
+        status.textContent='Thank you. Your enquiry has been sent to our team.';
+      }catch{
+        status.setAttribute('role','alert');
+        status.textContent=failureMessage;
+      }finally{
+        clearTimeout(sendTimeout);
+        sending=false;submitButton.disabled=false;
+        submitLabel.textContent=idleLabel;
+        enquiryForm.removeAttribute('aria-busy');
+      }
     });
   }
   // The four service photographs share a single, keyboard-accessible carousel.
