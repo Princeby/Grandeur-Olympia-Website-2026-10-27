@@ -1,7 +1,7 @@
 GRANDEUR OLYMPIA - QUIET AUTHORITY
 Updated 27 October 2026
 
-Open index.html for Home. About us, Our services, and Contact us are included. Upload the contents of this folder to the root of your static website.
+Open index.html for a local content preview. About us, Our services, and Contact us are included. Deploy through the existing GitHub-connected Cloudflare Worker. Complete CONTACT_FORM_SETUP.md before deploying direct contact email delivery.
 
 This revision includes larger type, a four-image technical/MEP gallery, original partner logos and industry labels, facility and construction photography, an aligned four-column footer with a two-line office address, revised client wording, Nigeria/Africa coverage, and the company history supplied by the client.
 
