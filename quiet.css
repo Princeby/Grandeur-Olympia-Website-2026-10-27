@@ -1,4 +1,8 @@
 /* Quiet Authority: the selected design, extended with the client's content. */
+/* ── Lazy-load image transitions ── */
+img[data-src]{opacity:0;transition:opacity .4s ease}
+img[data-src].quiet-img-loaded,img.quiet-img-loaded{opacity:1}
+img[loading="lazy"]{content-visibility:auto}
 .quiet-theme{--whatsapp:#25d366;--whatsapp-ink:#0b3a25}
 .quiet-theme [hidden]{display:none!important}
 .quiet-theme button,.quiet-theme input,.quiet-theme select,.quiet-theme textarea{font-family:Geist,Arial,sans-serif}

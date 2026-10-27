@@ -49,6 +49,25 @@
     $$('.quiet-reveal').forEach(el=>observer.observe(el));
   }
 
+  /* ── Site-wide lazy-load for images using data-src ── */
+  if ('IntersectionObserver' in window) {
+    const lazyImages = $$('img[data-src]');
+    if (lazyImages.length) {
+      const imgObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const img = entry.target;
+          img.src = img.dataset.src;
+          delete img.dataset.src;
+          img.removeAttribute('data-src');
+          img.addEventListener('load', () => img.classList.add('quiet-img-loaded'), { once: true });
+          obs.unobserve(img);
+        });
+      }, { rootMargin: '200px 0px' });
+      lazyImages.forEach(img => imgObserver.observe(img));
+    }
+  }
+
   const helpToggle = $('[data-help-toggle]');
   const helpPanel = $('#quiet-help-panel');
   function setHelp(open,focus=false){
