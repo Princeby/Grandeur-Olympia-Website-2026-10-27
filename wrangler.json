@@ -5,7 +5,9 @@
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": [
+      "/api/*"
+    ]
   },
   "send_email": [
     {
@@ -17,7 +19,28 @@
     {
       "name": "CONTACT_RATE_LIMITER",
       "namespace_id": "2026102701",
-      "simple": { "limit": 5, "period": 60 }
+      "simple": {
+        "limit": 5,
+        "period": 60
+      }
     }
-  ]
+  ],
+  "previews": {
+    "send_email": [
+      {
+        "name": "CONTACT_EMAIL",
+        "destination_address": "grandeurolympiaglobal@gmail.com"
+      }
+    ],
+    "ratelimits": [
+      {
+        "name": "CONTACT_RATE_LIMITER",
+        "namespace_id": "2026102702",
+        "simple": {
+          "limit": 5,
+          "period": 60
+        }
+      }
+    ]
+  }
 }

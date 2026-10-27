@@ -35,3 +35,7 @@ References:
 - https://developers.cloudflare.com/email-service/configuration/send-bindings/
 - https://developers.cloudflare.com/email-service/api/send-emails/workers-api/
 - https://developers.cloudflare.com/email-service/platform/pricing/
+
+## Preview deployments
+
+Cloudflare’s configured preview command is `wrangler preview`. The `previews` block supplies its required email and rate-limit bindings. Preview submissions intentionally use the same verified company inbox, with a separate rate-limit namespace so preview testing does not consume the production limit. Send only clearly labelled test enquiries from previews.
