@@ -1,0 +1,53 @@
+[
+  {
+    "label": "Arion Energy Services",
+    "industry": "Oil & gas",
+    "page_url": "https://www.arionenergyservices.com/",
+    "asset_url": "https://www.arionenergyservices.com/wp-content/plugins/arion-energy-services/assets/images/company-logo.png",
+    "filename": "arion-energy.png",
+    "note": "Original header/footer logo on the official Nigerian company website. No recolouring, cropping or redraw.",
+    "content_type": "image/png",
+    "format": "PNG",
+    "width": 2048,
+    "height": 385,
+    "mode": "RGBA",
+    "sha256": "a0eae8a8b04b6d9a5fbb555e82f3353298cc7f7d920621bd24d380e1b7b5d359",
+    "bytes": 73360,
+    "retrieved_date": "2026-10-26",
+    "original_unmodified": true
+  },
+  {
+    "label": "UPDC Plc",
+    "industry": "Real estate & property management",
+    "page_url": "https://updcplc.com/",
+    "asset_url": "https://updcplc.com/wp-content/uploads/2024/03/cropped-updc-plc.png",
+    "filename": "updc-plc.png",
+    "note": "Official Organization logo identified by the homepage structured data; also present in the official WordPress media library. UPDC is the company identified earlier in the project; user latest wording said Update plc, interpreted as the same UPDC Plc. No recolouring, cropping or redraw.",
+    "content_type": "image/png",
+    "format": "PNG",
+    "width": 1535,
+    "height": 689,
+    "mode": "RGBA",
+    "sha256": "4ca3947ddd9781363715ff7eb95fe1e3dcef5d75f53ae0a9f43012727f90f2ed",
+    "bytes": 92553,
+    "retrieved_date": "2026-10-26",
+    "original_unmodified": true
+  },
+  {
+    "label": "Edge Facility Managers",
+    "industry": "Facility management",
+    "page_url": "https://edgefm.org/",
+    "asset_url": "https://edgefm.org/wp-content/uploads/2023/03/Edge-Logo_Full-Coloured-Logo-e1679168225470.png",
+    "filename": "edge-fm.png",
+    "note": "Original full-colour header logo on the official Edge FM website. No recolouring, cropping or redraw.",
+    "content_type": "image/png",
+    "format": "PNG",
+    "width": 500,
+    "height": 263,
+    "mode": "RGBA",
+    "sha256": "1d04760beb9c49cfcbc9d9625cbd3cb84c644e8ebdce63ab574f8ec6bf03bf20",
+    "bytes": 13306,
+    "retrieved_date": "2026-10-26",
+    "original_unmodified": true
+  }
+]
