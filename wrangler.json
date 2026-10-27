@@ -1,0 +1,23 @@
+{
+  "name": "grandeur-olympia",
+  "main": "worker/contact.mjs",
+  "compatibility_date": "2026-10-27",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "send_email": [
+    {
+      "name": "CONTACT_EMAIL",
+      "destination_address": "grandeurolympiaglobal@gmail.com"
+    }
+  ],
+  "ratelimits": [
+    {
+      "name": "CONTACT_RATE_LIMITER",
+      "namespace_id": "2026102701",
+      "simple": { "limit": 5, "period": 60 }
+    }
+  ]
+}

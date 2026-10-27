@@ -10,8 +10,8 @@ Technical services also include distribution and supply of mechanical, electrica
 Established and registered: 2024. Operations began: November 2025.
 Coverage: Nigeria, including Lagos and Abuja, and Africa. Physical office: No 10/11 Abebe Court, Ikoyi, Lagos, Nigeria.
 
-Contact and newsletter forms prepare emails to grandeurolympiaglobal@gmail.com. The visitor sends the message using their own email application. WhatsApp and support use the company number +234 813 527 1957.
+The contact form sends enquiries through the Cloudflare Worker to grandeurolympiaglobal@gmail.com after Email Service is configured. Complete CONTACT_FORM_SETUP.md before deploying this revision. The newsletter prompt still prepares an email in the visitor’s email application. WhatsApp and support use the company number +234 813 527 1957.
 
 Original Arion Energy Services, UPDC Plc, and Edge Facility Managers logos come from official company sources. Source URLs and original file hashes are in assets/partners/provenance.json. Service photographs are generated illustrations and do not claim to depict real company staff or completed projects.
 
-The source remains a local review copy; this package has not been deployed by this task. Source and DOM interaction checks passed; rendered-browser review remains unavailable.
+Direct contact submissions have passed backend, browser-behavior, and local rendered-browser checks using a simulated email service. Live email delivery requires Cloudflare domain onboarding, verification of the destination Gmail address, and an inbox test after deployment.
