@@ -49,25 +49,6 @@
     $$('.quiet-reveal').forEach(el=>observer.observe(el));
   }
 
-  /* ── Site-wide lazy-load for images using data-src ── */
-  if ('IntersectionObserver' in window) {
-    const lazyImages = $$('img[data-src]');
-    if (lazyImages.length) {
-      const imgObserver = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const img = entry.target;
-          img.src = img.dataset.src;
-          delete img.dataset.src;
-          img.removeAttribute('data-src');
-          img.addEventListener('load', () => img.classList.add('quiet-img-loaded'), { once: true });
-          obs.unobserve(img);
-        });
-      }, { rootMargin: '200px 0px' });
-      lazyImages.forEach(img => imgObserver.observe(img));
-    }
-  }
-
   const helpToggle = $('[data-help-toggle]');
   const helpPanel = $('#quiet-help-panel');
   function setHelp(open,focus=false){
@@ -143,7 +124,8 @@
     });
   }
   // The four service photographs share a single, keyboard-accessible carousel.
-  // Only the first asset loads eagerly; later slides load when requested.
+  // Keep the current photograph visible until the requested one is decoded.
+  // Warm just the next slide after each successful display.
   const gallery=$('[data-hero-gallery]');
   if(gallery){
     const slides=[...gallery.querySelectorAll('[data-gallery-slide]')];
@@ -152,7 +134,29 @@
     const pauseButton=gallery.querySelector('[data-gallery-pause]');
     const counter=gallery.querySelector('[data-gallery-current]');
     const status=gallery.querySelector('[data-gallery-status]');
-    let current=0,userPaused=false,hovered=false,galleryTimer;
+    let current=0,requested=0,requestId=0,userPaused=false,hovered=false,galleryTimer;
+    const imageLoads=new WeakMap();
+    function prepareImage(image){
+      if(imageLoads.has(image))return imageLoads.get(image);
+      const loading=new Promise(resolve=>{
+        const cleanup=()=>{image.removeEventListener('load',loaded);image.removeEventListener('error',failed);};
+        const failed=()=>{cleanup();resolve(false);};
+        const loaded=async()=>{
+          cleanup();
+          if(image.decode){try{await image.decode();}catch{/* A loaded image can still be drawable when decode rejects. */}}
+          const ready=image.naturalWidth>0;
+          if(ready)delete image.dataset.src;
+          resolve(ready);
+        };
+        image.addEventListener('load',loaded,{once:true});
+        image.addEventListener('error',failed,{once:true});
+        if(image.dataset.src)image.src=image.dataset.src;
+        if(image.complete){if(image.naturalWidth)void loaded();else failed();}
+      });
+      imageLoads.set(image,loading);
+      void loading.then(ready=>{if(!ready)imageLoads.delete(image);});
+      return loading;
+    }
     const forcedPause=()=>prefersReduced?.matches||document.body.classList.contains('is-motion-paused');
     function schedule(){
       clearTimeout(galleryTimer);
@@ -161,22 +165,35 @@
       pauseButton.setAttribute('aria-pressed',String(userPaused));
       pauseButton.setAttribute('aria-label',userPaused?'Resume slideshow':'Pause slideshow');
       pauseButton.querySelector('span').textContent=userPaused?'Play':'Pause';
-      if(slides.length<2||forced||userPaused||hovered||document.hidden||gallery.contains(document.activeElement))return;
-      galleryTimer=setTimeout(()=>{show(current+1,false);schedule();},7000);
+      if(slides.length<2||requested!==current||forced||userPaused||hovered||document.hidden||gallery.contains(document.activeElement))return;
+      galleryTimer=setTimeout(()=>{void show(current+1,false);},7000);
     }
-    function show(index,announce=true){
-      current=(index+slides.length)%slides.length;
-      const image=slides[current].querySelector('img');
-      if(image.dataset.src){image.src=image.dataset.src;delete image.dataset.src;}
+    async function show(index,announce=true){
+      clearTimeout(galleryTimer);
+      requested=(index+slides.length)%slides.length;
+      const target=requested;
+      const id=++requestId;
+      gallery.setAttribute('aria-busy','true');
+      const ready=await prepareImage(slides[target].querySelector('img'));
+      if(id!==requestId)return;
+      gallery.removeAttribute('aria-busy');
+      if(!ready){
+        requested=current;
+        if(announce)status.textContent='This image could not load. Please try another image.';
+        schedule();return;
+      }
+      current=target;
       slides.forEach((slide,i)=>{slide.hidden=i!==current;});
       dots.forEach((dot,i)=>dot.setAttribute('aria-pressed',String(i===current)));
       counter.textContent=String(current+1).padStart(2,'0');
       if(announce)status.textContent=slides[current].getAttribute('aria-label');
+      if(slides.length>1)void prepareImage(slides[(current+1)%slides.length].querySelector('img'));
+      schedule();
     }
     controls.hidden=false;
-    gallery.querySelector('[data-gallery-next]').addEventListener('click',()=>{show(current+1);schedule();});
-    gallery.querySelector('[data-gallery-prev]').addEventListener('click',()=>{show(current-1);schedule();});
-    dots.forEach((dot,i)=>dot.addEventListener('click',()=>{show(i);schedule();}));
+    gallery.querySelector('[data-gallery-next]').addEventListener('click',()=>{void show(requested+1);});
+    gallery.querySelector('[data-gallery-prev]').addEventListener('click',()=>{void show(requested-1);});
+    dots.forEach((dot,i)=>dot.addEventListener('click',()=>{void show(i);}));
     pauseButton.addEventListener('click',()=>{userPaused=!userPaused;schedule();});
     gallery.addEventListener('mouseenter',()=>{hovered=true;schedule();});
     gallery.addEventListener('mouseleave',()=>{hovered=false;schedule();});
@@ -184,12 +201,12 @@
     gallery.addEventListener('focusout',event=>{if(!gallery.contains(event.relatedTarget))queueMicrotask(schedule);});
     gallery.addEventListener('keydown',event=>{
       if(event.key==='ArrowLeft'||event.key==='ArrowRight'){
-        event.preventDefault();show(current+(event.key==='ArrowRight'?1:-1));schedule();
+        event.preventDefault();void show(requested+(event.key==='ArrowRight'?1:-1));
       }
     });
     document.addEventListener('visibilitychange',schedule);
     document.addEventListener('quiet-motion-change',schedule);
     prefersReduced?.addEventListener('change',schedule);
-    show(0,false);schedule();
+    void show(0,false);
   }
 })();

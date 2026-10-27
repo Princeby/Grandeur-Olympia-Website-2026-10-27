@@ -1,8 +1,4 @@
 /* Quiet Authority: the selected design, extended with the client's content. */
-/* ── Lazy-load image transitions ── */
-img[data-src]{opacity:0;transition:opacity .4s ease}
-img[data-src].quiet-img-loaded,img.quiet-img-loaded{opacity:1}
-img[loading="lazy"]{content-visibility:auto}
 .quiet-theme{--whatsapp:#25d366;--whatsapp-ink:#0b3a25}
 .quiet-theme [hidden]{display:none!important}
 .quiet-theme button,.quiet-theme input,.quiet-theme select,.quiet-theme textarea{font-family:Geist,Arial,sans-serif}
@@ -630,6 +626,8 @@ img[loading="lazy"]{content-visibility:auto}
 .quiet-theme .quiet-gallery-actions [data-gallery-pause]{width:auto;gap:9px;font-size:13px;padding:11px 14px;margin-right:5px}
 .quiet-sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @keyframes quiet-gallery-arrive{from{opacity:.25;transform:scale(1.015)}to{opacity:1;transform:scale(1)}}
+.is-motion-paused .quiet-gallery-slide img{animation:none}
+@media(prefers-reduced-motion:reduce){.quiet-gallery-slide img{animation:none}}
 .quiet-theme .quiet-newsletter-band p,.quiet-theme .quiet-newsletter-dialog>p,.quiet-theme .quiet-form-intro,.quiet-theme .quiet-contact-whatsapp p,.quiet-theme .quiet-help-body>p{font-size:15px;line-height:1.8;max-width:560px}
 .quiet-theme .quiet-newsletter-band .button{font-size:14px}
 .quiet-theme .quiet-form-two{gap:18px}
