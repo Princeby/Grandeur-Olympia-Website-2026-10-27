@@ -5,6 +5,7 @@ const SERVICES = Object.freeze({
   'facility-management': 'Facility management',
   mep: 'Technical & MEP services',
   construction: 'Construction execution',
+  'solar-installation': 'Solar installation & energy solutions',
   general: 'A general enquiry'
 });
 const SEND_ERROR = 'We couldn’t send your enquiry. Please try again or email grandeurolympiaglobal@gmail.com.';

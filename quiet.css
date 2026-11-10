@@ -829,3 +829,42 @@
 .quiet-service-body>.quiet-service-photo+p{margin-bottom:30px}
 
 .quiet-company-window:focus-within .quiet-company-track{animation:none;transform:none}
+
+/* Solar installation: approved homepage feature and Services detail. */
+.solar-service-detail{border-bottom:1px solid var(--line);padding-block:72px;scroll-margin-top:8px}
+.solar-feature{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:24px;background:#fff;min-height:430px;scroll-margin-top:124px}
+.solar-feature-photo{position:relative;min-height:430px;background:#dce4eb}
+.solar-feature-photo img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:47% center}
+.solar-feature-photo:after{content:'';position:absolute;inset:65% 0 0;background:linear-gradient(transparent,#13294466);pointer-events:none}
+.solar-feature-photo figcaption{position:absolute;right:20px;bottom:15px;color:white;font-size:11px;text-shadow:0 1px 3px #13294480;z-index:1}
+.solar-feature-copy{padding:36px 40px;display:flex;flex-direction:column;align-items:stretch}
+.solar-feature-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;color:var(--blue)}
+.solar-feature-top>svg{width:30px;height:30px}
+.solar-feature-top>span{font-size:12px;letter-spacing:.12em;color:var(--muted)}
+.solar-feature-copy h3{font-size:34px;line-height:1.14;letter-spacing:-.04em;font-weight:600}
+.solar-feature-copy>p{font-size:16px;line-height:1.8;color:var(--muted);margin-top:18px;max-width:490px}
+.solar-feature-copy .service-tags{font-size:12px;line-height:1.7;word-spacing:0;margin-top:24px;width:100%}
+.solar-service-link{display:flex;align-items:center;justify-content:space-between;margin-top:24px;font-size:14px}
+.solar-detail-hero{display:grid;grid-template-columns:1fr 1.12fr;gap:95px;align-items:center;padding-bottom:50px;border-bottom:1px solid var(--line)}
+.solar-detail-heading>.eyebrow{font-size:11px;color:var(--muted);margin-bottom:28px}
+.solar-detail-heading>.solar-detail-icon{width:36px;height:36px;color:var(--blue);margin-bottom:25px}
+.solar-detail-heading h2{font-size:54px;line-height:1.1;letter-spacing:-.05em;max-width:520px}
+.solar-detail-heading>p{font-size:17px;line-height:1.8;color:var(--muted);margin-top:24px;max-width:475px}
+.solar-detail-heading .text-link{margin-top:28px;font-size:15px}
+.solar-detail-image{height:385px;margin-bottom:0}
+.solar-detail-image img{object-position:center 57%}
+.solar-scope-grid{display:grid;grid-template-columns:1fr 1fr;gap:95px;padding:48px 0 0}
+.solar-scope>.eyebrow{font-size:10px;color:var(--blue);margin-bottom:12px}
+.solar-scope h3{font-size:30px;line-height:1.2;letter-spacing:-.035em;margin-bottom:17px}
+.solar-scope>p{font-size:16px;color:var(--muted);line-height:1.8;min-height:87px;margin-bottom:23px;max-width:510px}
+.solar-scope ul{list-style:none;margin:0;padding:0}
+.solar-scope li{display:flex;gap:16px;padding:15px 0;border-top:1px solid var(--line);font-size:16px;line-height:1.6}
+.solar-scope li>span{color:var(--blue);flex:0 0 auto}
+.solar-scope-note{border-top:1px solid var(--line);margin-top:40px;padding-top:22px;font-size:14px;color:var(--muted);line-height:1.8}
+.solar-next{display:flex;align-items:center;justify-content:space-between;gap:32px;border-radius:18px;padding:34px 40px;background:#edf0ef;border:1px solid #e2e6e5;margin-top:38px}
+.solar-next .eyebrow{font-size:10px;color:var(--muted);margin-bottom:10px}
+.solar-next h3{font-size:32px;line-height:1.2;letter-spacing:-.035em}
+
+@media(min-width:801px){.quiet-theme .quiet-service-jump{grid-template-columns:repeat(4,minmax(0,1fr))}.quiet-service-jump a{min-width:0}}
+@media(max-width:1100px){.solar-detail-hero,.solar-scope-grid{gap:48px}.solar-feature-copy{padding:30px}.solar-feature-copy h3{font-size:30px}.solar-detail-heading h2{font-size:46px}}
+@media(max-width:760px){.solar-feature{grid-template-columns:1fr}.solar-feature-photo{min-height:265px}.solar-feature-copy{padding:27px}.solar-feature-copy h3{font-size:30px}.solar-feature-copy>p{font-size:16px}.solar-feature-copy .service-tags{font-size:12px}.solar-detail-hero,.solar-scope-grid{grid-template-columns:1fr;gap:32px}.solar-service-detail{padding-block:45px}.solar-detail-heading h2{font-size:42px}.solar-detail-heading>p{font-size:16px}.solar-detail-image{height:290px}.solar-scope-grid{padding-top:32px;gap:36px}.solar-scope h3{font-size:28px}.solar-scope>p{min-height:0;margin-bottom:20px}.solar-scope li{font-size:15px}.solar-next{align-items:flex-start;flex-direction:column;padding:28px}.solar-next h3{font-size:29px}}
