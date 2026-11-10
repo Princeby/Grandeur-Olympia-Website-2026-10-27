@@ -1,6 +1,6 @@
 {
   "mode": "built-in image generation",
-  "reference_notes": "Provast official imagery and the user-supplied CXALL screenshots informed the service context and compositions. All six images are original fictional illustrations, not actual staff or completed projects.",
+  "reference_notes": "Provast official imagery and the user-supplied CXALL screenshots informed the service context and compositions. All images are original fictional illustrations, not actual staff or completed projects.",
   "images": [
     {
       "key": "technical-services-hero",
@@ -25,6 +25,15 @@
     {
       "key": "construction-execution-team",
       "prompt": "Create an original, photorealistic editorial service photograph for Grandeur Olympia, a Nigerian facility management and construction execution company. Landscape 3:2 composition, professional architectural and workplace photography, natural African daylight, restrained navy workwear and neutral building materials, realistic anatomy and equipment. No text, logos, branding or watermarks. Fictional illustrative workers and project, not a real employee or claimed completed project. Subject and activity should be clearly visible at a glance, calm professional moment rather than posed advertising. Show appropriate hard hats, gloves, safety footwear and PPE. Main subject: two Nigerian site professionals, a male site engineer and a female construction coordinator in navy workwear, reflective vests and white hard hats, reviewing a large unfolded construction drawing at an active mid-rise building site in Lagos. Reinforced concrete columns, orderly scaffolding and masonry works clearly visible behind them. Practical eye-level image from slightly to one side, people discussing the actual plan, natural dust and material texture, realistic standard construction site. No drilling rig, no borehole, no generic office, no posed smiles. Editorial photograph about site coordination and construction execution."
+    },
+    {
+      "key": "solar-installation-engineers",
+      "prompt": "Use case: photorealistic-natural. Asset type: a landscape 3:2 service photograph for Grandeur Olympia's solar-installation website design preview. Primary request: two fictional adult West African engineers, one man and one woman, actively installing photovoltaic solar panels on a modern commercial building's flat rooftop in Lagos, Nigeria. One engineer kneels beside the aluminium mounting rails and carefully secures a module frame with an appropriate hand tool while the other steadies the panel by its aluminium edge. Both wear unbranded navy-blue workwear with restrained silver reflective bands, clean white hard hats, protective gloves, work boots, and properly worn fall-protection equipment; the rooftop has a visible protective parapet. New fictional people, not real company employees. Style: polished but believable commercial engineering photography, natural soft daylight, realistic skin and material texture, white/grey contemporary architecture, dark navy photovoltaic cells with fine silver grid lines, subtle greenery and a quiet distant urban skyline. Match a restrained premium corporate website's existing bright natural photographs of Nigerian facility and MEP engineers in navy workwear and white helmets. Balanced eye-level medium-wide composition, engineers and visible panel-fastening activity kept in the central safe area for wide and square crops, enough rooftop and multiple neatly aligned panels to make the installation context unmistakable. Moderate depth of field, accurate anatomy, credible panel mounting, no walking on panel glass, no dangling live electrical conductors. No text, logos, watermark, diagrams, UI, lens flare, oversaturated solar-blue, or dramatic sunset.",
+      "files": [
+        "assets/solar-installation-engineers.webp",
+        "assets/solar-installation-engineers-768.webp"
+      ],
+      "notes": "Approved illustrative image; fictional engineers, not documented company employees or a completed project. WebP variants use the same approved image."
     }
   ]
 }

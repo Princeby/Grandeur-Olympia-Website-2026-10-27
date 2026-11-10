@@ -34,6 +34,18 @@ test('send exactly one email to the fixed company inbox; visitor is Reply-To', a
   assert.equal(response.headers.get('Cache-Control'), 'no-store');
 });
 
+test('solar enquiries reach the company inbox with the correct service label', async () => {
+  const { env, sent } = setup();
+  const response = await worker.fetch(request({ ...valid, service: 'solar-installation' }), env);
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { ok: true });
+  assert.equal(sent.length, 1);
+  assert.equal(sent[0].to, 'grandeurolympiaglobal@gmail.com');
+  assert.equal(sent[0].replyTo, valid.email);
+  assert.equal(sent[0].subject, 'Website enquiry: Solar installation & energy solutions');
+  assert.match(sent[0].text, /Service: Solar installation & energy solutions/);
+});
+
 test('do not report success before the email service accepts the message', async () => {
   const { env } = setup();
   let release;
